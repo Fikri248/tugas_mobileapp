@@ -12,7 +12,6 @@ pipeline {
     stage('Build JAR/Code Check') { 
       steps { 
         echo "Mulai verifikasi kode (opsional)"; 
-        // Tambahkan test lint atau unit test jika diperlukan
       } 
     }
     stage('Build Docker Image') {

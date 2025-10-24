@@ -30,7 +30,6 @@ def calculate():
     except ValueError:
         return render_template('result.html', error='Please enter valid numbers!')
 
-# Tetap sediakan endpoint API untuk testing
 @app.route('/api/calculate', methods=['GET'])
 def calculate_api():
     try:
