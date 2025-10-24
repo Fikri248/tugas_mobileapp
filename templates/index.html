@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sederhana</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Kalkulator Sederhana</h1>
+        <form action="/calculate" method="POST">
+            <div class="input-group">
+                <label for="num1">Angka Pertama:</label>
+                <input type="number" step="any" name="num1" id="num1" placeholder="Masukkan angka pertama" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="operation">Operasi:</label>
+                <select name="operation" id="operation" required>
+                    <option value="+">Penjumlahan (+)</option>
+                    <option value="-">Pengurangan (-)</option>
+                    <option value="*">Perkalian (×)</option>
+                    <option value="/">Pembagian (÷)</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="num2">Angka Kedua:</label>
+                <input type="number" step="any" name="num2" id="num2" placeholder="Masukkan angka kedua" required>
+            </div>
+            
+            <button type="submit" class="btn-calculate">Hitung</button>
+        </form>
+        
+        <div class="info">
+            <p>Saya buat dengan Flask + Docker + Jenkins</p>
+        </div>
+    </div>
+</body>
+</html>

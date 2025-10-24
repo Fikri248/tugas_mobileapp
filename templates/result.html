@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Perhitungan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Hasil Perhitungan</h1>
+        
+        {% if error %}
+        <div class="result-box error">
+            <p class="error-message">{{ error }}</p>
+        </div>
+        {% else %}
+        <div class="result-box success">
+            <div class="calculation">
+                <p class="expression">{{ num1 }} {{ operation }} {{ num2 }}</p>
+                <p class="equals">=</p>
+                <p class="answer">{{ result }}</p>
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="button-group">
+            <a href="/" class="btn-back">Hitung Lagi</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/calculate', methods=['POST'])
+def calculate():
+    try:
+        num1 = float(request.form['num1'])
+        num2 = float(request.form['num2'])
+        operation = request.form['operation']
+        
+        if operation == '+':
+            result = num1 + num2
+        elif operation == '-':
+            result = num1 - num2
+        elif operation == '*':
+            result = num1 * num2
+        elif operation == '/':
+            if num2 == 0:
+                return render_template('result.html', error='Cannot divide by zero!')
+            result = num1 / num2
+        else:
+            return render_template('result.html', error='Invalid operation!')
+        
+        return render_template('result.html', num1=num1, num2=num2, operation=operation, result=result)
+    except ValueError:
+        return render_template('result.html', error='Please enter valid numbers!')
+
+# Tetap sediakan endpoint API untuk testing
+@app.route('/api/calculate', methods=['GET'])
+def calculate_api():
+    try:
+        a = float(request.args.get('a', ''))
+        b = float(request.args.get('b', ''))
+        op = request.args.get('op', '+')
+        
+        if op == '+':
+            result = a + b
+        elif op == '-':
+            result = a - b
+        elif op == '*':
+            result = a * b
+        elif op == '/':
+            if b == 0:
+                return {"error": "Division by zero"}, 400
+            result = a / b
+        else:
+            return {"error": "Unsupported operation"}, 400
+        
+        return {"result": result}
+    except Exception as e:
+        return {"error": str(e)}, 400
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
