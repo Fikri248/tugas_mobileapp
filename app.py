@@ -2,6 +2,12 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+def format_number(num):
+    """Format number to remove .0 if it's a whole number"""
+    if isinstance(num, float) and num.is_integer():
+        return int(num)
+    return num
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -26,7 +32,15 @@ def calculate():
         else:
             return render_template('result.html', error='Invalid operation!')
         
-        return render_template('result.html', num1=num1, num2=num2, operation=operation, result=result)
+        num1_formatted = format_number(num1)
+        num2_formatted = format_number(num2)
+        result_formatted = format_number(result)
+        
+        return render_template('result.html', 
+                             num1=num1_formatted, 
+                             num2=num2_formatted, 
+                             operation=operation, 
+                             result=result_formatted)
     except ValueError:
         return render_template('result.html', error='Please enter valid numbers!')
 
@@ -50,7 +64,9 @@ def calculate_api():
         else:
             return {"error": "Unsupported operation"}, 400
         
-        return {"result": result}
+        result_formatted = format_number(result)
+        
+        return {"result": result_formatted}
     except Exception as e:
         return {"error": str(e)}, 400
 
