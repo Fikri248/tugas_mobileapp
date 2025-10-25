@@ -1,7 +1,15 @@
 services:
-  kalkulator:
-    image: mohamadfikriisfahani/kalkulator-app:latest
-    container_name: kalkulator-app
+  calculator-app:
+    build: .
+    container_name: calculator-reactnative
     ports:
-      - "5000:5000"
-    restart: unless-stopped
+      - "19000:19000"
+      - "19001:19001"
+      - "19002:19002"
+    environment:
+      - EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0
+    volumes:
+      - .:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true

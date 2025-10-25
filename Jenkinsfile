@@ -1,18 +1,13 @@
 pipeline {
   agent any
   environment {
-    IMAGE_NAME = 'mohamadfikriisfahani/kalkulator-app'
+    IMAGE_NAME = 'mohamadfikriisfahani/calculator-reactnative'
     REGISTRY = 'https://index.docker.io/v1/'
     REGISTRY_CREDENTIALS = '24'
   }
   stages {
     stage('Checkout') { 
       steps { checkout scm } 
-    }
-    stage('Build JAR/Code Check') { 
-      steps { 
-        echo "Mulai verifikasi kode (opsional)"; 
-      } 
     }
     stage('Build Docker Image') {
       steps {
